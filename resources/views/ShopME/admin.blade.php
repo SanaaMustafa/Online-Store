@@ -129,6 +129,7 @@ header {
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                     </span>
+                    <!-- View of Add Product with Error at Uploading image-->
                     <h4 class="service-heading">New Product</h4>
                     <form action="ShopME/store" method="POST" class="text-muted">
                         {!!csrf_field()!!}

@@ -47,7 +47,7 @@ public function admin(){
     }
     public function store(Request $request)
     {
-
+//Controller of Add Product With Error at uploading image
          $title=$request->input('title');
          $price=$request->input('price');
          $shortdes=$request->input('shortdes');
