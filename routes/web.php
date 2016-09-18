@@ -11,7 +11,7 @@
 |
 */
 
-
+//Routes
 
 Auth::routes();
 Route::get('/ShopME' ,         ['as'=>'ShopME.index','uses'=>'ProductController@index']);
