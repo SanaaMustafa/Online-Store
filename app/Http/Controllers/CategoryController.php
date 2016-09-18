@@ -24,6 +24,7 @@ class CategoryController extends Controller
     	$new->save();
     	return redirect('/admin');
     }
+    //deleteing error
     public function destroy($id)
     {
         //

@@ -108,7 +108,7 @@ public function admin(){
     }
      public function destroy($id)
     {
-        //
+        //deleting error
         Product::destroy($id);
         return redirect('/admin');
 

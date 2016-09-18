@@ -167,6 +167,7 @@ header {
                         <input type="text" name="id" class="form-control"><br>
                         <button class="btn btn-success" type="submit">ADD</button>
                     </form>
+                    <!--Deleting Error -->
                      <h4 class="service-heading">Delete category</h4>
                      <div class="text-muted">
 
@@ -224,6 +225,7 @@ header {
                         <i class="fa fa-circle fa-stack-2x text-r"></i>
                         <i class="fa  fa-trash-o fa-stack-1x fa-inverse"></i>
                     </span>
+                    <!--Deleting Error: delete category not product -->
                     <h4 class="service-heading">Delete Products</h4>
                     <div calss="text-muted">
                         @foreach($products as $product)
