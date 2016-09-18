@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>ShopME</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
    <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -36,43 +37,51 @@
 
 </head>
 <style type="text/css">
-.panel-default {
-    border-color: #FFC107;
- background-color: rgba(232, 185, 129, 0.46);
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    color: #FF9800;
+    background-color: #fed136;
 }
-.panel-default>.panel-heading {
-    color: #ffac32;
-    background-color: #100a01;
-    border-color: #ffc107;
+.dropdown-menu{
+    background-color: #FFC107;
 }
-.navbar-custom .nav li a {
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: #fff;
+.row{
+    padding-top:75px;
 }
-.row {
-    margin-right: -15px;
-    margin-left: -15px;
-    padding-top: 150px;
+h2{
+    text-transform: capitalize;
+    color: #FFC107;
 }
-body{
-    background-image: url('/img/log.jpg');
+h3{
+    text-transform: capitalize;
+}
+.text-p {
+    color: green;
+}
+.text-r{
+    color:red;
+}
+header {
+    background-image: url('../img/admin.png');
+    margin-top: 100px;
+    height: 315px;
     background-size: cover;
+    width:1300;
+  
 }
+
 </style>
+
 <body id="page-top" class="index">
 
     <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top" style="background-color:black;">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">SHopME</a>
+                <a class="navbar-brand page-scroll" href="{{url('/ShopME')}}">SHopME</a>
             </div>
 
             <ul class="nav navbar-nav">
@@ -88,6 +97,10 @@ body{
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                @if(Auth::user()->id==1)
+                                <li><a href="{{url('/admin')}}">Dashboard</a></li>
+                            
+                                @endif
                             </ul>
                         </li>
                     @endif
@@ -97,71 +110,49 @@ body{
         </div>
         <!-- /.container-fluid -->
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3>Login</h3></div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Dashboard</h2>
+                    <h3 class="section-subheading text-muted">Manage your site</h3>
                 </div>
             </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Editing Product</h4>
+                    <form action="{{ route('ShopME.update', $product->id) }}" method="POST" class="text-muted">
+                        {!!csrf_field()!!}
+                         <input type="hidden" name="_method" value="PATCH" />
+                    
+                        <input type="text" name="title" class="form-control" value="{{$product->title}}"><br>
+                        
+                       <center><input type="file" name="image" value="{{$product->image}}"></center><br>
+                        
+                        <textarea name="shortdes" row="50" class="form-control" value="{{$product->shortdes}}"></textarea><br>
+                         
+                        <textarea name="longdes" row="50" class="form-control" value="{{$product->longdes}}"></textarea><br>
+                         
+                       <input type="text" name="price" class="form-control" value="{{$product->price}}"><br>
+                       
+                       <input type="text" name="category_id" class="form-control" value="{{$product->category_id}}"><br>
+            
+                       <input type="text" name="location" class="form-control" value="{{$product->location}}"><br><br>
+
+
+                        <button class="btn btn-primary" type="submit">Edit</button>
+
+                    </form> 
+                </div>
+                 </div>
         </div>
-    </div>
-</div>
-<footer>
+    </section>
+
+     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -208,4 +199,6 @@ body{
     <!-- Theme JavaScript -->
     <script src="/js/agency.min.js"></script>
 
+</body>
 
+</html>

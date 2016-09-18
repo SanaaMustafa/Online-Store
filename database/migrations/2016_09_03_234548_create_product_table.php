@@ -21,7 +21,7 @@ class CreateProductTable extends Migration
             $table->string('shortdes');
             $table->text('longdes');
             $table->string('image');
-            $table->integer('category');
+            $table->string('category_id');
             $table->string('location');
             $table->timestamps();
         });
