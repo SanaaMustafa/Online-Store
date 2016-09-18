@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Cart extends Model
 {
     //
-    public function category()
+    
+    public function user()
     {
-    	return $this->belongsTo('App\Category');
+        return $this->belongsTo('App\User');
     }
-
+ 
     public function cartItems()
     {
         return $this->hasMany('App\CartItem');
     }
 }
-
