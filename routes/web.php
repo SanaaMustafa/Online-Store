@@ -24,3 +24,6 @@ Route::delete('/category/{id}/', ['as'=>'category.delete','uses'=>'CategoryContr
 Route::get('/ShopME/{id}/edit',     ['as' =>'ShopME.edit','uses' => 'ProductController@edit']);
 Route::patch('/ShopME/{id}',          ['as'=>'ShopME.update', 'uses'=>'ProductController@update']);
 Route::delete('ShopME/{id}', ['as'=>'ShopME.delete','uses'=>'ProductController@destroy']);
+Route::get('/addProduct/{productId}', 'CartController@addItem');
+Route::get('/removeItem/{productId}', 'CartController@removeItem');
+Route::get('/cart', 'CartController@showCart');
