@@ -77,7 +77,7 @@
                                 @if(Auth::user()->id==1)
                                 <li><a href="{{url('/admin')}}">Dashboard</a></li>
                                 @else
-                                <li><a href="#">Card</a></li>
+                                <li><a href="/cart">Card</a></li>
                                 @endif
                             </ul>
                         </li>
@@ -149,7 +149,7 @@
                         <h4>{{$product->title}}</h4>
                         <p class="text-muted"> {{$product->shortdes}} </p>
                         <h5><font color="green">{{$product->price}}$</font> </h5>
-                        <a href="{{ route('ShopME.show', $product->id) }}" class="btn btn-success">ADD TO Cart</a>
+                        <a href="/addProduct/{{$product->id}}" class="btn btn-success">ADD TO Cart</a>
                     
                         <h5>Ctegories:#{{$product->category->name}}</h5>
                         <h5> Location:{{$product->location}}</h5>

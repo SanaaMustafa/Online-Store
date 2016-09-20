@@ -16,14 +16,15 @@ class CartController extends Controller
     {
         $this->middleware('auth');
     }
+    
  
     public function addItem ($productId){
  
-        $cart = Cart::where('user_id',Auth::user()->id)->first();
+        $cart = Cart::where('user_id',\Auth::user()->id)->first();
  
         if(!$cart){
             $cart =  new Cart();
-            $cart->user_id=Auth::user()->id;
+            $cart->user_id=\Auth::user()->id;
             $cart->save();
         }
  
@@ -37,11 +38,11 @@ class CartController extends Controller
     }
  
     public function showCart(){
-        $cart = Cart::where('user_id',Auth::user()->id)->first();
+        $cart = Cart::where('user_id',\Auth::user()->id)->first();
  
         if(!$cart){
             $cart =  new Cart();
-            $cart->user_id=Auth::user()->id;
+            $cart->user_id=\Auth::user()->id;
             $cart->save();
         }
  
@@ -51,7 +52,7 @@ class CartController extends Controller
             $total+=$item->product->price;
         }
  
-        return view('cart.view',['items'=>$items,'total'=>$total]);
+        return view('ShopME.cart',['items'=>$items,'total'=>$total]);
     }
  
     public function removeItem($id){

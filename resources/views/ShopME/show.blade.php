@@ -92,6 +92,11 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            @if(Auth::user()->id==1)
+                                <li><a href="{{url('/admin')}}">Dashboard</a></li>
+                                @else
+                                <li><a href="/cart">Card</a></li>
+                                @endif
                             </ul>
                         </li>
                     @endif
